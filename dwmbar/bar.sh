@@ -2,15 +2,6 @@
 
 cd /home/cmsx/.dwm/dwmbar/
 
-if [ -f "bar" ]; then
-  brightness_value=$(cat bar | grep brightness | awk '{printf "%.2f\n" , $3/100}')
-  xrandr --output eDP --brightness $brightness_value
-  echo ' ' >bar
-else
-  touch bar
-  echo "export brightness='󰃠 100%'" >bar
-fi
-
 update() {
 
   brightness=' '
@@ -33,7 +24,30 @@ update() {
 
 }
 
-while true; do
+start() {
+
+  cd /home/cmsx/.dwm/dwmbar/
+
+  if [ -f "bar" ]; then
+    brightness_value=$(cat bar | grep brightness | awk '{printf "%.2f\n" , $3/100}')
+    xrandr --output eDP --brightness $brightness_value
+    echo ' ' >bar
+  else
+    touch bar
+    echo "export brightness='󰃠 100%'" >bar
+  fi
+
+  while true; do
+    update
+    sleep 5
+  done
+}
+
+case "$1" in
+update)
   update
-  sleep 5
-done
+  ;;
+start)
+  start
+  ;;
+esac
