@@ -6,4 +6,4 @@ cpu_temp=$(sensors | grep Tctl | awk '{printf "%d°C\n", $2}')
 
 sed -i '/cpu/d' bar
 
-printf "export cpu=' %s'\n" "$cpu_usage" >>bar
+printf "export cpu=' %s  %s'\n" "$cpu_usage" "$cpu_temp" >>bar

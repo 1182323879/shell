@@ -10,6 +10,7 @@ update() {
   disk=' '
   mem=' '
   vol=' '
+  battery=' '
 
   sh bri.sh
   sh cpu.sh
@@ -17,10 +18,11 @@ update() {
   sh disk.sh
   sh mem.sh
   sh vol.sh
+  sh battery.sh
 
   source ./bar
 
-  xsetroot -name "$cpu|$mem|$disk|$brightness|$vol|$date_time"
+  xsetroot -name "[$cpu][$mem][$disk][$brightness][$vol][$date_time][$battery]"
 
 }
 
