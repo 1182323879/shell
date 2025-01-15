@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cpu_usage=$(top -b -n1 | grep "Cpu(s)" | awk '{print 100 - $8"%"}')
+cpu_usage=$(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* 闲.*/\1/" | awk '{print 100 - $1"%"}')
 
 cpu_temp=$(sensors | grep Tctl | awk '{printf "%d°C\n", $2}')
 
